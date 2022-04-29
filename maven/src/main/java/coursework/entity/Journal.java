@@ -1,7 +1,7 @@
 package coursework.entity;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "JOURNAL")
@@ -35,19 +35,19 @@ public class Journal {
   private Client clientId;
 
   @Column(name = "date_beg", nullable = false)
-  private LocalDateTime beginDate;
+  private LocalDate beginDate;
 
   @Column(name = "date_end", nullable = false)
-  private LocalDateTime endDate;
+  private LocalDate endDate;
 
   @Column(name = "date_ret", nullable = false)
-  private LocalDateTime returnDate;
+  private LocalDate returnDate;
 
   public Journal() {
   }
 
-  public Journal(Book bookId, Client clientId, LocalDateTime beginDate,
-      LocalDateTime endDate, LocalDateTime returnDate) {
+  public Journal(Book bookId, Client clientId, LocalDate beginDate,
+      LocalDate endDate, LocalDate returnDate) {
     this.bookId = bookId;
     this.clientId = clientId;
     this.beginDate = beginDate;
@@ -71,27 +71,27 @@ public class Journal {
     this.clientId = clientId;
   }
 
-  public LocalDateTime getBeginDate() {
+  public LocalDate getBeginDate() {
     return beginDate;
   }
 
-  public void setBeginDate(LocalDateTime beginDate) {
+  public void setBeginDate(LocalDate beginDate) {
     this.beginDate = beginDate;
   }
 
-  public LocalDateTime getEndDate() {
+  public LocalDate getEndDate() {
     return endDate;
   }
 
-  public void setEndDate(LocalDateTime endDate) {
+  public void setEndDate(LocalDate endDate) {
     this.endDate = endDate;
   }
 
-  public LocalDateTime getReturnDate() {
+  public LocalDate getReturnDate() {
     return returnDate;
   }
 
-  public void setReturnDate(LocalDateTime returnDate) {
+  public void setReturnDate(LocalDate returnDate) {
     this.returnDate = returnDate;
   }
 
