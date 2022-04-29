@@ -14,7 +14,10 @@
       <configuration>
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="Hibernate" />
-        <datasource-mapping />
+        <datasource-mapping>
+          <factory-entry name="entityManagerFactory" />
+          <factory-entry name="noname-a.xml@0" value="3371fbc2-2ddd-416c-b170-8394225fe786" />
+        </datasource-mapping>
         <naming-strategy-map />
       </configuration>
     </facet>
@@ -92,5 +95,6 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-web:5.3.17" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-webmvc:5.3.17" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-expression:5.3.17" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: javax.persistence:javax.persistence-api:2.2" level="project" />
   </component>
 </module>
