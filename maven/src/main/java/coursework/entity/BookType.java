@@ -1,4 +1,6 @@
 package coursework.entity;
+import static javax.persistence.GenerationType.SEQUENCE;
+
 import javax.persistence.*;
 
 
@@ -6,8 +8,15 @@ import javax.persistence.*;
 @Table(name = "BOOK_TYPES")
 public class BookType {
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  @Column(name = "id")
+  @SequenceGenerator(
+      name = "book_types_sequence",
+      sequenceName = "book_types_sequence",
+      allocationSize = 1
+  )
+  @GeneratedValue(
+      strategy = SEQUENCE,
+      generator = "book_types_sequence"
+  )
   private Long id;
 
   @Column(name = "name", nullable = false, length = 50)

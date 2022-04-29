@@ -1,5 +1,7 @@
 package coursework.entity;
 
+import static javax.persistence.GenerationType.SEQUENCE;
+
 import javax.persistence.*;
 
 @Entity
@@ -7,8 +9,15 @@ import javax.persistence.*;
 public class Client {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  @Column(name = "id")
+  @SequenceGenerator(
+      name = "clients_sequence",
+      sequenceName = "clients_sequence",
+      allocationSize = 1
+  )
+  @GeneratedValue(
+      strategy = SEQUENCE,
+      generator = "clients_sequence"
+  )
   private Long id;
 
   @Column(name = "first_name", nullable = false, length = 20)

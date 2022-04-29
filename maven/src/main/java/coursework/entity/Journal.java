@@ -1,5 +1,7 @@
 package coursework.entity;
 
+import static javax.persistence.GenerationType.SEQUENCE;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -8,8 +10,15 @@ import java.time.LocalDate;
 public class Journal {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  @Column(name = "id")
+  @SequenceGenerator(
+      name = "journal_sequence",
+      sequenceName = "journal_sequence",
+      allocationSize = 1
+  )
+  @GeneratedValue(
+      strategy = SEQUENCE,
+      generator = "journal_sequence"
+  )
   private Long id;
 
   @ManyToOne
