@@ -3,6 +3,8 @@ package coursework.entity;
 import static javax.persistence.GenerationType.SEQUENCE;
 
 import javax.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "CLIENTS")
@@ -20,18 +22,28 @@ public class Client {
   )
   private Long id;
 
+  @Getter
+  @Setter
   @Column(name = "first_name", nullable = false, length = 20)
   private String firstName;
 
+  @Getter
+  @Setter
   @Column(name = "last_name", nullable = false, length = 20)
   private String lastName;
 
+  @Getter
+  @Setter
   @Column(name = "pather_name", nullable = false, length = 20)
   private String patherName;
 
+  @Getter
+  @Setter
   @Column(name = "passport_seria", nullable = false, length = 20)
   private String passportSeria;
 
+  @Getter
+  @Setter
   @Column(name = "passport_num", nullable = false, length = 20)
   private String passportNumber;
 
@@ -45,57 +57,5 @@ public class Client {
     this.patherName = patherName;
     this.passportSeria = passportSeria;
     this.passportNumber = passportNumber;
-  }
-
-  public String getFirstName() {
-    return firstName;
-  }
-
-  public void setFirstName(String firstName) {
-    this.firstName = firstName;
-  }
-
-  public String getLastName() {
-    return lastName;
-  }
-
-  public void setLastName(String lastName) {
-    this.lastName = lastName;
-  }
-
-  public String getPatherName() {
-    return patherName;
-  }
-
-  public void setPatherName(String patherName) {
-    this.patherName = patherName;
-  }
-
-  public String getPassportSeria() {
-    return passportSeria;
-  }
-
-  public void setPassportSeria(String passportSeria) {
-    this.passportSeria = passportSeria;
-  }
-
-  public String getPassportNumber() {
-    return passportNumber;
-  }
-
-  public void setPassportNumber(String passportNumber) {
-    this.passportNumber = passportNumber;
-  }
-
-  @Override
-  public String toString() {
-    return "Client{" +
-        "id=" + id +
-        ", firstName='" + firstName + '\'' +
-        ", lastName='" + lastName + '\'' +
-        ", patherName='" + patherName + '\'' +
-        ", passportSeria='" + passportSeria + '\'' +
-        ", passportNumber='" + passportNumber + '\'' +
-        '}';
   }
 }

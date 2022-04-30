@@ -1,12 +1,15 @@
 package coursework.entity;
+
 import static javax.persistence.GenerationType.SEQUENCE;
 
 import javax.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
-
-@Entity(name = "BookType")
+@Entity
 @Table(name = "BOOK_TYPES")
 public class BookType {
+
   @Id
   @SequenceGenerator(
       name = "book_types_sequence",
@@ -19,15 +22,23 @@ public class BookType {
   )
   private Long id;
 
+  @Getter
+  @Setter
   @Column(name = "name", nullable = false, length = 50)
   private String name;
 
+  @Getter
+  @Setter
   @Column(name = "cnt", nullable = false)
   private Integer count;
 
+  @Getter
+  @Setter
   @Column(name = "fine", nullable = false)
   private Integer fine;
 
+  @Getter
+  @Setter
   @Column(name = "day_count", nullable = false)
   private Integer dayCount;
 
@@ -39,48 +50,5 @@ public class BookType {
     this.count = count;
     this.fine = fine;
     this.dayCount = dayCount;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public Integer getCount() {
-    return count;
-  }
-
-  public void setCount(Integer count) {
-    this.count = count;
-  }
-
-  public Integer getFine() {
-    return fine;
-  }
-
-  public void setFine(Integer fine) {
-    this.fine = fine;
-  }
-
-  public Integer getDayCount() {
-    return dayCount;
-  }
-
-  public void setDayCount(Integer dayCount) {
-    this.dayCount = dayCount;
-  }
-
-  @Override
-  public String toString() {
-    return "BookType{" +
-        "id=" + id +
-        ", name='" + name + '\'' +
-        ", count=" + count +
-        ", fine=" + fine +
-        ", dayCount=" + dayCount +
-        '}';
   }
 }

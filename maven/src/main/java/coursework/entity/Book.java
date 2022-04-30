@@ -3,6 +3,8 @@ package coursework.entity;
 import static javax.persistence.GenerationType.SEQUENCE;
 
 import javax.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "BOOKS")
@@ -20,17 +22,21 @@ public class Book {
   )
   private Long id;
 
+  @Getter
+  @Setter
   @Column(name = "name", nullable = false, length = 50)
   private String name;
 
+  @Getter
+  @Setter
   @Column(name = "cnt", nullable = false)
   private Integer count;
 
+  @Getter
+  @Setter
   @ManyToOne
   @JoinColumn(
       name = "type_id",
-      nullable = false,
-      referencedColumnName = "id",
       foreignKey = @ForeignKey(
           name = "fk_books_book_types"
       )
@@ -44,39 +50,5 @@ public class Book {
     this.name = name;
     this.count = count;
     this.typeId = typeId;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public Integer getCount() {
-    return count;
-  }
-
-  public void setCount(Integer count) {
-    this.count = count;
-  }
-
-  public BookType getTypeId() {
-    return typeId;
-  }
-
-  public void setTypeId(BookType typeId) {
-    this.typeId = typeId;
-  }
-
-  @Override
-  public String toString() {
-    return "Book{" +
-        "id=" + id +
-        ", name='" + name + '\'' +
-        ", count=" + count +
-        ", typeId=" + typeId +
-        '}';
   }
 }
