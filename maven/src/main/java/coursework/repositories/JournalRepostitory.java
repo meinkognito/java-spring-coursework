@@ -1,8 +1,10 @@
 package coursework.repositories;
 
 import coursework.entity.Journal;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface JournalRepostitory extends CrudRepository<Journal, Long> {
+@Repository
+public interface JournalRepostitory extends JpaRepository<Journal, Long> {
 
 }

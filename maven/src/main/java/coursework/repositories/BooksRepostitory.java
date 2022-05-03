@@ -1,8 +1,10 @@
 package coursework.repositories;
 
 import coursework.entity.Book;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface BooksRepostitory extends CrudRepository<Book, Long> {
+@Repository
+public interface BooksRepostitory extends JpaRepository<Book, Long> {
 
 }
