@@ -1,39 +1,27 @@
 package coursework.entity;
 
-import static javax.persistence.GenerationType.SEQUENCE;
-
 import javax.persistence.*;
+import lombok.NoArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "BOOKS")
+@NoArgsConstructor
 public class Book {
 
   @Id
-  @SequenceGenerator(
-      name = "books_sequence",
-      sequenceName = "books_sequence",
-      allocationSize = 1
-  )
-  @GeneratedValue(
-      strategy = SEQUENCE,
-      generator = "books_sequence"
-  )
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Getter
-  @Setter
   @Column(name = "name", nullable = false, length = 50)
   private String name;
 
-  @Getter
-  @Setter
   @Column(name = "cnt", nullable = false)
   private Integer count;
 
-  @Getter
-  @Setter
   @ManyToOne
   @JoinColumn(
       name = "type_id",
@@ -42,9 +30,6 @@ public class Book {
       )
   )
   private BookType typeId;
-
-  public Book() {
-  }
 
   public Book(String name, Integer count, BookType typeId) {
     this.name = name;
