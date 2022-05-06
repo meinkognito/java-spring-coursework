@@ -1,6 +1,5 @@
 package coursework.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

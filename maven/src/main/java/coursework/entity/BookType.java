@@ -38,18 +38,8 @@ public class BookType {
     this.dayCount = dayCount;
   }
 
-  @OneToMany(mappedBy = "type", cascade = CascadeType.ALL, orphanRemoval = true)
+  @OneToMany(mappedBy = "type", cascade = CascadeType.ALL, orphanRemoval = true,
+      fetch = FetchType.EAGER)
   @JsonIgnore
   private List<Book> books = new ArrayList<>();
-
-//  public void addBook(Book book) {
-//    this.books.add(book);
-//  }
-//
-//  public void removeBook(Book book) {
-//    if (!books.contains(book)) {
-//      throw new NoSuchElementException("no book");
-//    }
-//    this.books.remove(book);
-//  }
 }
