@@ -1,12 +1,12 @@
 package coursework;
 
 import coursework.entity.*;
-import coursework.repositories.*;
+import coursework.service.*;
 
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;
-import java.util.Optional;
+import java.util.Set;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -21,10 +21,10 @@ public class Application {
 
   @Bean
   CommandLineRunner commandLineRunner(
-      BookTypesRepostitory bookTypesRepostitory,
-      BooksRepostitory booksRepostitory,
-      ClientsRepostitory clientsRepostitory,
-      JournalRepostitory journalRepostitory
+      BookTypesService bookTypesService,
+      BooksService booksService,
+      ClientsService clientsService,
+      JournalService journalService
   ) {
 
     return args -> {
@@ -34,14 +34,14 @@ public class Application {
       BookType type3 = new BookType("Detective", 20, 15, 30);
       BookType type4 = new BookType("Horror", 15, 15, 30);
 
-      bookTypesRepostitory.saveAll(List.of(type1, type2, type3, type4));
+      bookTypesService.addBookTypes(List.of(type1, type2, type3, type4));
 
       Book book1 = new Book("1984", 7, type1);
       Book book2 = new Book("Sherlock Holmes", 10, type3);
       Book book3 = new Book("IT", 3, type4);
       Book book4 = new Book("Cinderella", 6, type2);
 
-      booksRepostitory.saveAll(List.of(book1, book2, book3, book4));
+      booksService.addBooks(List.of(book1, book2, book3, book4));
 
       Client client1 = new Client(
           "Abraham",
@@ -58,31 +58,45 @@ public class Application {
           "097856"
       );
 
-      clientsRepostitory.saveAll(List.of(client1, client2));
+      clientsService.addClients(List.of(client1, client2));
 
-      Journal journal1 = new Journal(book1,
-          client1,
+      Journal journal1 = new Journal(
+          Set.of(book1, book2),
+          Set.of(client1),
           LocalDate.of(1984, Month.AUGUST, 19),
           LocalDate.of(1984, Month.SEPTEMBER, 10),
           LocalDate.of(1984, Month.AUGUST, 31));
 
-      Journal journal2 = new Journal(book2,
-          client2,
+      Journal journal2 = new Journal(
+          Set.of(book3, book4),
+          Set.of(client2),
           LocalDate.of(2013, Month.AUGUST, 19),
           LocalDate.of(2013, Month.SEPTEMBER, 10),
           LocalDate.of(2013, Month.AUGUST, 31));
 
-      journalRepostitory.saveAll(List.of(journal1, journal2));
+      journalService.addJournals(List.of(journal1, journal2));
 
+      BookType tempType = bookTypesService.getBookTypeById(1L);
+      tempType.setDayCount(20);
 
-      Optional<Book> temp = booksRepostitory.findById(2L);
-      if (temp.isPresent()) {
-        temp.get().setName("IT 2");
-        temp.get().setCount(4);
+      booksService.updateBook(2L, new Book("Sherlock Holmes 2", 5, type3));
+
+      bookTypesService.deleteBookType(4L);
+
+      clientsService.updateClient(1L,
+          new Client(
+              "George",
+              "Washington",
+              "president of the US",
+              "1234",
+              "097856"
+          ));
+
+      journalService.deleteJournal(2L);
+
+      for (Book book : journalService.getJournalById(1L).getBooks()) {
+        booksService.deleteBook(book.getId());
       }
-
-
     };
   }
-
 }
