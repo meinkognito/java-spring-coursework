@@ -27,6 +27,10 @@ public class JournalService {
     return journalRepostitory.save(newJournal);
   }
 
+  public List<Journal> addJournals(List<Journal> journals) {
+    return journalRepostitory.saveAll(journals);
+  }
+
   @Transactional
   public void updateJournal(Long id, Journal journal) throws NoSuchElementException {
     Journal draft = journalRepostitory.findById(id)

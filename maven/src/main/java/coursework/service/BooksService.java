@@ -27,6 +27,10 @@ public class BooksService {
     return booksRepostitory.save(newBook);
   }
 
+  public List<Book> addBooks(List<Book> books) {
+    return booksRepostitory.saveAll(books);
+  }
+
   @Transactional
   public void updateBook(Long id, Book book) throws NoSuchElementException {
     Book draft = booksRepostitory.findById(id)

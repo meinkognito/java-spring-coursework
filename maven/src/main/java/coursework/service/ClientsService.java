@@ -27,6 +27,10 @@ public class ClientsService {
     return clientsRepostitory.save(newClient);
   }
 
+  public List<Client> addClients(List<Client> clients) {
+    return clientsRepostitory.saveAll(clients);
+  }
+
   @Transactional
   public void updateClient(Long id, Client client) throws NoSuchElementException {
     Client draft = clientsRepostitory.findById(id)
