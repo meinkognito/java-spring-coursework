@@ -37,8 +37,4 @@ public class Book {
     this.count = count;
     this.type = type;
   }
-
-  @ManyToOne
-  @JsonIgnore
-  private Journal journal;
 }

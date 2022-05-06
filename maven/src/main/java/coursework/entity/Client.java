@@ -40,8 +40,4 @@ public class Client {
     this.passportSeria = passportSeria;
     this.passportNumber = passportNumber;
   }
-
-  @ManyToOne
-  @JsonIgnore
-  private Journal journal;
 }

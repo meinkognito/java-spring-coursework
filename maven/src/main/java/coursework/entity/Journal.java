@@ -46,10 +46,10 @@ public class Journal {
   @Column(name = "date_ret", nullable = false)
   private LocalDate returnDate;
 
-  public Journal(Book book, Client client, LocalDate beginDate,
+  public Journal(List<Book> books, List<Client> clients, LocalDate beginDate,
       LocalDate endDate, LocalDate returnDate) {
-    this.books.add(book);
-    this.clients.add(client);
+    this.books = books;
+    this.clients = clients;
     this.beginDate = beginDate;
     this.endDate = endDate;
     this.returnDate = returnDate;
