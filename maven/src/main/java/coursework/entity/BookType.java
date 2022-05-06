@@ -7,7 +7,6 @@ import javax.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @Getter
 @Setter
@@ -32,7 +31,6 @@ public class BookType {
   @Column(name = "day_count", nullable = false)
   private Integer dayCount;
 
-  @Autowired
   public BookType(String name, Integer count, Integer fine, Integer dayCount) {
     this.name = name;
     this.count = count;
