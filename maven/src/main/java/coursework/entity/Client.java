@@ -1,5 +1,6 @@
 package coursework.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -39,4 +40,8 @@ public class Client {
     this.passportSeria = passportSeria;
     this.passportNumber = passportNumber;
   }
+
+  @ManyToOne
+  @JsonIgnore
+  private Journal journal;
 }

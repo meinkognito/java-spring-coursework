@@ -1,5 +1,6 @@
 package coursework.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import lombok.NoArgsConstructor;
 import lombok.Getter;
@@ -29,11 +30,15 @@ public class Book {
           name = "fk_books_book_types"
       )
   )
-  private BookType typeId;
+  private BookType type;
 
-  public Book(String name, Integer count, BookType typeId) {
+  public Book(String name, Integer count, BookType type) {
     this.name = name;
     this.count = count;
-    this.typeId = typeId;
+    this.type = type;
   }
+
+  @ManyToOne
+  @JsonIgnore
+  private Journal journal;
 }

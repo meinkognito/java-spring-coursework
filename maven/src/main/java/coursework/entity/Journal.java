@@ -1,5 +1,7 @@
 package coursework.entity;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.*;
 import java.time.LocalDate;
 import lombok.Getter;
@@ -8,32 +10,32 @@ import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @Entity
 @Table(name = "JOURNAL")
-@NoArgsConstructor
 public class Journal {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @ManyToOne
+  @OneToMany
   @JoinColumn(
       name = "book_id",
       foreignKey = @ForeignKey(
           name = "fk_journal_books"
       )
   )
-  private Book bookId;
+  private List<Book> books = new ArrayList<>();
 
-  @ManyToOne
+  @OneToMany
   @JoinColumn(
       name = "client_id",
       foreignKey = @ForeignKey(
           name = "fk_journal_clients"
       )
   )
-  private Client clientId;
+  private List<Client> clients = new ArrayList<>();
 
   @Column(name = "date_beg", nullable = false)
   private LocalDate beginDate;
@@ -44,10 +46,10 @@ public class Journal {
   @Column(name = "date_ret", nullable = false)
   private LocalDate returnDate;
 
-  public Journal(Book bookId, Client clientId, LocalDate beginDate,
+  public Journal(Book book, Client client, LocalDate beginDate,
       LocalDate endDate, LocalDate returnDate) {
-    this.bookId = bookId;
-    this.clientId = clientId;
+    this.books.add(book);
+    this.clients.add(client);
     this.beginDate = beginDate;
     this.endDate = endDate;
     this.returnDate = returnDate;

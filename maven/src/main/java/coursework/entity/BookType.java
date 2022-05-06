@@ -1,9 +1,13 @@
 package coursework.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Getter
 @Setter
@@ -28,10 +32,26 @@ public class BookType {
   @Column(name = "day_count", nullable = false)
   private Integer dayCount;
 
+  @Autowired
   public BookType(String name, Integer count, Integer fine, Integer dayCount) {
     this.name = name;
     this.count = count;
     this.fine = fine;
     this.dayCount = dayCount;
   }
+
+  @OneToMany(mappedBy = "type", cascade = CascadeType.ALL, orphanRemoval = true)
+  @JsonIgnore
+  private List<Book> books = new ArrayList<>();
+
+//  public void addBook(Book book) {
+//    this.books.add(book);
+//  }
+//
+//  public void removeBook(Book book) {
+//    if (!books.contains(book)) {
+//      throw new NoSuchElementException("no book");
+//    }
+//    this.books.remove(book);
+//  }
 }
