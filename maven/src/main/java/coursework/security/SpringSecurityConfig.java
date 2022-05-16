@@ -33,21 +33,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         .and()
         .authorizeRequests()
         .antMatchers("/auth").permitAll()
-        .antMatchers(HttpMethod.GET,
-            "/bookTypes", "/bookType/{id}",
-            "/books", "/book/{id}",
-            "/clients", "/client{id}",
-            "/journals", "/journal{id}").permitAll()
-        .antMatchers(HttpMethod.POST, "/addBook", "/addClient").hasRole("USER")
-        .antMatchers(HttpMethod.PUT, "/updateBook{id}", "updateClient{id}").hasRole("USER")
-        .antMatchers(HttpMethod.DELETE, "/deleteBook{id}", "/deleteClient{id}").hasRole("USER")
-        .antMatchers(HttpMethod.POST, "/addBook", "/addClient", "/addBookType", "/addJournal")
-        .hasRole("ADMIN")
-        .antMatchers(HttpMethod.PUT, "/updateBook{id}", "updateClient{id}", "/updateBookType{id}",
-            "/updateJournal{id}").hasRole("ADMIN")
-        .antMatchers(HttpMethod.DELETE, "/deleteBook{id}", "/deleteClient{id}",
-            "/deleteBookType{id}", "deleteJournal{id}")
-        .hasRole("ADMIN")
+        .antMatchers(HttpMethod.GET).permitAll()
+        .antMatchers(HttpMethod.POST).hasAnyRole("USER", "ADMIN")
+        .antMatchers(HttpMethod.PUT).hasAnyRole("USER", "ADMIN")
+        .antMatchers(HttpMethod.DELETE).hasRole("ADMIN")
         .anyRequest().authenticated()
         .and()
         .apply(new JWTSecurityConfigurer(jwtTokenProvider));
