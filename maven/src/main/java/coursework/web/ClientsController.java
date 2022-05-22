@@ -44,22 +44,20 @@ public class ClientsController {
   }
 
   @PutMapping("/updateClient/{id}")
-  public HttpStatus updateClient(@PathVariable Long id, @RequestBody Client Client) {
+  public ResponseEntity<Client> updateClient(@PathVariable Long id, @RequestBody Client Client) {
     try {
-      clientsService.updateClient(id, Client);
+      return new ResponseEntity<>(clientsService.updateClient(id, Client), HttpStatus.OK);
     } catch (NoSuchElementException e) {
       throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found");
     }
-    return HttpStatus.OK;
   }
 
   @DeleteMapping("/deleteClient/{id}")
-  public HttpStatus deleteClient(@PathVariable Long id) {
+  public ResponseEntity<Client> deleteClient(@PathVariable Long id) {
     try {
-      clientsService.deleteClient(id);
+      return new ResponseEntity<>(clientsService.deleteClient(id), HttpStatus.OK);
     } catch (NoSuchElementException e) {
       throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found");
     }
-    return HttpStatus.OK;
   }
 }

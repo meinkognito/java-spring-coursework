@@ -44,22 +44,21 @@ public class BookTypesController {
   }
 
   @PutMapping("/updateBookType/{id}")
-  public HttpStatus updateBook(@PathVariable Long id, @RequestBody BookType bookType) {
+  public ResponseEntity<BookType> updateBook(@PathVariable Long id,
+      @RequestBody BookType bookType) {
     try {
-      bookTypesService.updateBookType(id, bookType);
+      return new ResponseEntity<>(bookTypesService.updateBookType(id, bookType), HttpStatus.OK);
     } catch (NoSuchElementException e) {
       throw new ResponseStatusException(HttpStatus.NOT_FOUND, "BookType not found");
     }
-    return HttpStatus.OK;
   }
 
   @DeleteMapping("/deleteBookType/{id}")
-  public HttpStatus deleteBook(@PathVariable Long id) {
+  public ResponseEntity<BookType> deleteBook(@PathVariable Long id) {
     try {
-      bookTypesService.deleteBookType(id);
+      return new ResponseEntity<>(bookTypesService.deleteBookType(id), HttpStatus.OK);
     } catch (NoSuchElementException e) {
       throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Book not found");
     }
-    return HttpStatus.OK;
   }
 }

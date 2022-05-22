@@ -32,7 +32,7 @@ public class JournalService {
   }
 
   @Transactional
-  public void updateJournal(Long id, Journal journal) throws NoSuchElementException {
+  public Journal updateJournal(Long id, Journal journal) throws NoSuchElementException {
     Journal draft = journalRepostitory.findById(id)
         .orElseThrow(() -> new NoSuchElementException("no Journal"));
 
@@ -41,12 +41,14 @@ public class JournalService {
     draft.setBeginDate(journal.getBeginDate());
     draft.setEndDate(journal.getEndDate());
     draft.setReturnDate(journal.getReturnDate());
+    return draft;
   }
 
-  public void deleteJournal(Long id) throws NoSuchElementException {
+  public Journal deleteJournal(Long id) throws NoSuchElementException {
     Journal journalToDelete = journalRepostitory.findById(id)
         .orElseThrow(() -> new NoSuchElementException("no Journal"));
 
     journalRepostitory.delete(journalToDelete);
+    return journalToDelete;
   }
 }
