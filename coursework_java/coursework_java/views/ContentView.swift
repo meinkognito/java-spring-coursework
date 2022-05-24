@@ -16,6 +16,8 @@ struct ContentView: View {
       LoginView(pageRouter: pageRouter)
     case .main:
       JournalsView(pageRouter: pageRouter)
+    case .guestMode:
+      GuestMode(pageRouter: pageRouter)
     }
   }
 }

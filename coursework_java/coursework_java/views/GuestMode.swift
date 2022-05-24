@@ -1,16 +1,16 @@
 //
-//  JournalsView.swift
+//  GuestMode.swift
 //  coursework_java
 //
-//  Created by Denis Beloshitskiy on 5/23/22.
+//  Created by Denis Beloshitskiy on 5/24/22.
 //
 
 import SwiftUI
 
-struct JournalsView: View {
+struct GuestMode: View {
   @StateObject var pageRouter: PageRouter
   @StateObject var journalService = JournalService()
-  @State var isGuest = false
+  @State var isGuest = true
 
   var body: some View {
     NavigationView {
@@ -20,12 +20,6 @@ struct JournalsView: View {
             JournalView(journal: item, isGuest: $isGuest)
           } label: {
             Text("Journal - \(item.id)")
-          }
-        }
-        .onDelete { index in
-          journalService.items.remove(atOffsets: index)
-          Task {
-            let _: Journal = try await RequestManager().perform(JournalRequest.delete(id: index.first ?? 0))
           }
         }
       }.onAppear {
@@ -44,11 +38,5 @@ struct JournalsView: View {
           }
         ))
     }
-  }
-}
-
-struct MainView_Previews: PreviewProvider {
-  static var previews: some View {
-    JournalsView(pageRouter: PageRouter())
   }
 }

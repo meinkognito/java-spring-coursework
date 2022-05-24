@@ -13,4 +13,5 @@ class PageRouter: ObservableObject {
 enum Page {
   case login
   case main
+  case guestMode
 }

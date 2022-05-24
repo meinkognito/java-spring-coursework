@@ -9,9 +9,9 @@ import SwiftUI
 
 struct LoginView: View {
   @StateObject var pageRouter: PageRouter
-  
-  @State private var login = User.user.username
-  @State private var password = User.user.password
+
+  @State private var login = ""
+  @State private var password = ""
   @State private var showingAlert = false
 
   var body: some View {
@@ -53,6 +53,16 @@ struct LoginView: View {
         .foregroundColor(.black)
         .font(.title3.bold())
         .padding()
+        Spacer()
+
+        Button {
+          pageRouter.currentPage = .guestMode
+        } label: {
+          Text("Login as a guest")
+        }.buttonStyle(.bordered)
+          .foregroundColor(.black)
+          .font(.title3.bold())
+          .padding()
         Spacer()
       }
     }
