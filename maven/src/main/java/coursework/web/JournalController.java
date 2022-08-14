@@ -44,22 +44,21 @@ public class JournalController {
   }
 
   @PutMapping("/updateJournal/{id}")
-  public HttpStatus updateJournal(@PathVariable Long id, @RequestBody Journal Journal) {
+  public ResponseEntity<Journal> updateJournal(@PathVariable Long id,
+      @RequestBody Journal Journal) {
     try {
-      journalService.updateJournal(id, Journal);
+      return new ResponseEntity<>(journalService.updateJournal(id, Journal), HttpStatus.OK);
     } catch (NoSuchElementException e) {
       throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Journal not found");
     }
-    return HttpStatus.OK;
   }
 
   @DeleteMapping("/deleteJournal/{id}")
-  public HttpStatus deleteJournal(@PathVariable Long id) {
+  public ResponseEntity<Journal> deleteJournal(@PathVariable Long id) {
     try {
-      journalService.deleteJournal(id);
+      return new ResponseEntity<>(journalService.deleteJournal(id), HttpStatus.OK);
     } catch (NoSuchElementException e) {
       throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Journal not found");
     }
-    return HttpStatus.OK;
   }
 }

@@ -32,19 +32,21 @@ public class BooksService {
   }
 
   @Transactional
-  public void updateBook(Long id, Book book) throws NoSuchElementException {
+  public Book updateBook(Long id, Book book) throws NoSuchElementException {
     Book draft = booksRepostitory.findById(id)
         .orElseThrow(() -> new NoSuchElementException("no book"));
 
     draft.setName(book.getName());
     draft.setCount(book.getCount());
     draft.setType(book.getType());
+    return draft;
   }
 
-  public void deleteBook(Long id) throws NoSuchElementException {
+  public Book deleteBook(Long id) throws NoSuchElementException {
     Book bookToDelete = booksRepostitory.findById(id)
         .orElseThrow(() -> new NoSuchElementException("no book"));
 
     booksRepostitory.delete(bookToDelete);
+    return bookToDelete;
   }
 }

@@ -32,7 +32,7 @@ public class ClientsService {
   }
 
   @Transactional
-  public void updateClient(Long id, Client client) throws NoSuchElementException {
+  public Client updateClient(Long id, Client client) throws NoSuchElementException {
     Client draft = clientsRepostitory.findById(id)
         .orElseThrow(() -> new NoSuchElementException("no client"));
 
@@ -41,12 +41,14 @@ public class ClientsService {
     draft.setPatherName(client.getPatherName());
     draft.setPassportSeria(client.getPassportSeria());
     draft.setPassportNumber(client.getPassportNumber());
+    return draft;
   }
 
-  public void deleteClient(Long id) throws NoSuchElementException {
+  public Client deleteClient(Long id) throws NoSuchElementException {
     Client clientToDelete = clientsRepostitory.findById(id)
         .orElseThrow(() -> new NoSuchElementException("no client"));
 
     clientsRepostitory.delete(clientToDelete);
+    return clientToDelete;
   }
 }
